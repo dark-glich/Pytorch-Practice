@@ -44,3 +44,46 @@ tensor = torch.tensor([[2,4],[1,3]])
 print(tensor.dtype) # Datatype of tensor
 print(tensor.shape) # Shape of the tensor
 print(tensor.device) # Location where tensor is stored
+
+"""### Operations on Tensors"""
+
+# Slicing & Indexing
+tensor = torch.tensor([[1,2,3],[4,5,6]])
+print(tensor[0]) # Gives the frist row
+print(tensor[:,0]) # Gives the first column
+print(tensor[:,-1]) # Gives the last column
+
+# concatenating Tensors
+tensor = torch.zeros((2,2))
+tensor2 = torch.cat([tensor, tensor], dim=0)
+print(tensor2)
+
+# Adding a Constant value 
+tensor = torch.zeros((2,2))
+print(tensor, "\n")
+tensor.add_(5) # It adds 5 to all values of the tensor
+print(tensor)
+
+"""## Tensors with Numpy Array
+Tensors on the CPU and NumPy arrays can share their underlying memory locations, and changing one will change the other.
+"""
+
+# Tensor to NumPy array
+tensor = torch.zeros((5))
+print(tensor)
+array = tensor.numpy() # array share the space in memory as tensor
+print(array)
+
+tensor.add_(3)
+print(tensor)
+print(array) # A change in the tensor reflects in the NumPy array.
+
+# NumPy array to Tensor
+array = np.ones(5)
+print(array)
+tensor = torch.from_numpy(array)  # tensor share the space in memory as array
+print(tensor)
+
+np.add(array, 1, out=array)
+print(array) 
+print(tensor) # A change in the array reflects in the Tensor.
